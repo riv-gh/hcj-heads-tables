@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Формування табличок ВРП</title>
+    <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+<div class="no-print">
+    <div id="scroll"></div>
+    <div class="control">
+        <button id="btn_translate"><input id="cb_translate" type="checkbox" checked="checked"> Перекласти</button>
+        <button id="btn_create"><input id="cb_create" type="checkbox" checked="checked"> Сформувати</button>
+        <button onclick="window.print()">На друк</button>
+        <div>
+            <input type="checkbox" id="cb_img"> <label for="cb_img">як було</label>
+            <button onclick="window.open('https://github.com/riv-gh/hcj-heads-tables/')">GitHub</button>
+        </div>
+    </div>
+    <textarea id="person-list" placeholder="Ім'я Прізвище у стовпчик">
+Григорій Усик
+Інна Плахтій
+Оксана Блажівська
+Віталій Саліхов
+Роман Маселко
+Микола Мороз
+Дмитро Лук'янов
+Олександр Сасевич
+Алла Котелевець
+Юлія Бокова
+Ольга Попікова
+Сергій Бурлаков
+Олена Ковбій
+Тетяна Бондаренко
+Всеволод Князєв
+    </textarea>
+    <textarea id="person-list-translate" placeholder="Ім'я Прізвище транслітом у стовпчик"></textarea>
+</div>
+    <div id="person-table-conatiner">
+        <!-- <div class="table-tiem">
+            <div>Григорій УСИКHryhorii USYK</div>
+            <div>Hryhorii USYK</div>
+            <img alt="background" src="./from_msword.files/image.png">
+            <div class="item-background1"></div>
+            <div class="item-background2"></div>
+            <div class="item-background3"></div>
+        </div> -->
+        <h1>З'явиться при заповненні</h1>
+    </div>
+<script src="./src/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.line {
+    margin-top: 10px;
+    width: 729px;
+    height: 1px;
+    border-bottom: 1px solid black;
+}
+.table-tiem {
+    width: 729px;
+    height: 299px;
+    margin: 30px 0;
+    position: relative;
+    font-size: 75px;
+    line-height: 75px;
+    font-weight: 600;
+    text-shadow: #bbb 3px 3px 0px;
+    color: blue;
+    margin-top: 30px;
+    border-bottom: 1px solid black;
+}
+.table-tiem>div {
+    position: absolute;
+    width: 689px;
+    left: 20px;
+    text-align: center;
+    white-space: nowrap;
+}
+.table-tiem>div:nth-child(1) {
+    top: 34px;
+}
+.table-tiem>div:nth-child(2) {
+    top:156px;
+}
+.table-tiem>div>span:nth-child(1) {
+    text-transform: capitalize;
+}
+.table-tiem>div>span:nth-child(2) {
+    text-transform: uppercase;
+}
+#person-list, #person-list-translate {
+    display: block;
+    position: fixed;
+    left: 800px;
+    top: 0;
+    overflow-y: scroll;
+    width: calc( (100% - 729px) / 2 );
+    height: 100vh;
+    resize: none;
+    font-size: 24px;
+    padding: 10px;
+}
+#person-list-translate {
+    left: calc( 800px + (100% - 800px) / 2  )
+}
+
+.control {
+    position: fixed;
+    top:0;
+    left: 0;
+    background-color:#ddd;
+    width: 800px;
+    height: 40px;
+    z-index: 999;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.control>button {
+    font-size: 24px;
+}
+
+@media screen {
+    #person-table-conatiner {
+        margin-top: 60px;
+    }        
+}
+
+.page-break {
+    page-break-after: always;
+    width: 729px;
+    height: 10px;
+    background-color: red;
+}
+
+@media print {
+    .no-print {
+        display: none;
+    }
+    .page-break {
+        background-color: transparent;
+    }
+}
+
+.table-tiem .item-background1 {
+    position: absolute;
+    border: 2px solid blue;
+    border-radius: 45px;
+    width: 725px;
+    height: 264px;
+    top: 2px;
+    left: 2px;
+}
+.table-tiem .item-background2 {
+    position: absolute;
+    border: 2px solid blue;
+    border-radius: 43px;
+    width: 719px;
+    height: 258px;
+    top: 5px;
+    left: 5px;
+}
+.table-tiem .item-background3 {
+    position: absolute;
+    background-color: blue;
+    width: 667px;
+    height: 3px;
+    top: 137px;
+    left: 27px;
+}
+
+body.img .item-background1,
+body.img .item-background2,
+body.img .item-background3 {
+    display: none;
+}
+
+body:not(.img) .table-tiem img {
+    display: none;
+}
+ 
+#scroll {
+    position: fixed;
+    background-color: gray;
+    top: 0vh;
+    left: 795px;
+    height: 100px;
+    width: 2px;
+    border-radius: 2px;
+    z-index: 9999;
+
+}
