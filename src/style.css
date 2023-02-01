@@ -136,12 +136,12 @@ body:not(.img) .table-tiem img {
  
 #scroll {
     position: fixed;
-    background-color: gray;
+    /* background-color: gray; */
+    background-color: transparent;
     top: 0vh;
     left: 795px;
-    height: 100px;
+    height: 0vh;
     width: 2px;
     border-radius: 2px;
-    z-index: 9999;
-
+    z-index: 9999;  
 }

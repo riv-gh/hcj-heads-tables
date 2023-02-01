@@ -1,4 +1,6 @@
 const WIDTH = 689
+const MAX_FONT_SIZE = 120
+
 const transliteration =  (inputText) => {
     const rules = [
         {'pattern': 'а', 'replace': 'a'},
@@ -136,8 +138,9 @@ const resizeSpanFont = () => {
                     return spanWidth
                 })
         )
-
-        tableItem.style.fontSize=`${WIDTH/width * 70}px`
+        let fontSize = WIDTH/width * 70
+        fontSize = fontSize>MAX_FONT_SIZE ? MAX_FONT_SIZE : fontSize  
+        tableItem.style.fontSize =   fontSize+'px'
         
     }))
 }
@@ -155,6 +158,13 @@ const createItemsElements = () => {
                 ua: el.split(' '),
                 en: enList[i].split(' '),
             }))
+            .map(el=>{
+                if (el.ua.length<2)
+                    el.ua.push('')
+                if (el.en.length<2)
+                    el.en.push('')
+                return el
+            })
             .map(n => ({
                 ua: {
                     f: n.ua[0],
@@ -172,7 +182,7 @@ const createItemsElements = () => {
                 <div>
                     <span>${n.ua.f}</span>
                     <span>${n.ua.l}</span>
-                </div>
+                </div>    
                 <div>
                     <span>${n.en.f}</span>
                     <span>${n.en.l}</span>
