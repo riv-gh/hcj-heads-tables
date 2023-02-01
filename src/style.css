@@ -136,8 +136,8 @@ body:not(.img) .table-tiem img {
  
 #scroll {
     position: fixed;
-    /* background-color: gray; */
-    background-color: transparent;
+    background-color: gray;
+    /* background-color: transparent; */
     top: 0vh;
     left: 795px;
     height: 0vh;

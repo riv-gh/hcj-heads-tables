@@ -197,14 +197,9 @@ const createItemsElements = () => {
 }
 
 const onScroll = ()=>{
-    scrollEl.style.top = 100*window.pageYOffset/document.body.clientHeight+'vh'
-    scrollEl.style.height = 
-        // document.documentElement.clientHeight /
-        100.0 /
-        (
-            (document.body.clientHeight + document.documentElement.clientHeight) /
-            document.documentElement.clientHeight
-        )+'vh'
+    scrollEl.style.top = 100 * window.pageYOffset / document.body.clientHeight + 'vh'
+    scrollEl.style.height = 90 * document.documentElement.clientHeight /
+        document.body.clientHeight + 'vh'
 }
 
 const onEdit = ()=>{
