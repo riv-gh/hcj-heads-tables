@@ -85,7 +85,7 @@
     page-break-after: always;
     width: 729px;
     height: 10px;
-    background-color: red;
+    background-color: pink;
 }
 
 @media print {
