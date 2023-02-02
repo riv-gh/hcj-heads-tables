@@ -101,17 +101,52 @@ const transliteration =  (inputText) => {
     }
     return inputText;
 };
-const personListEl = document.getElementById('person-list')
-const personListTranslitEl = document.getElementById('person-list-translate')
+var personListEl = document.getElementById('person-list')
+var personListTranslitEl = document.getElementById('person-list-translate')
 const personTableConatinerEl = document.getElementById('person-table-conatiner')
-const cbTraslate = document.getElementById('cb_translate')
-const cbCreate = document.getElementById('cb_create')
+var cbTraslate = document.getElementById('cb_translate')
+var cbCreate = document.getElementById('cb_create')
 const btnTraslate = document.getElementById('btn_translate')
 const btnCreate = document.getElementById('btn_create')
 const btnNameReverse = document.getElementById('btn_name_reverse')
+const btnToSmallerFont = document.getElementById('btn_to_smaller_font')
 const cbImg = document.getElementById('cb_img')
 const selTableType = document.getElementById('sel_table_type')
 const scrollEl = document.getElementById('scroll')
+
+const setState = () => {
+    const state = JSON.parse(localStorage.getItem('state'))
+    console.log("🚀 ~ file: script.js:119 ~ setState ~ state", state)
+    for (si in state) {
+        window[si][state[si]['property']] = state[si]['stateValue']
+        console.log("🚀 ~ file: script.js:122 ~ setState ~ si", si)
+        
+    }
+}
+setState()
+
+const saveState = () => {
+    const state = {
+        'cbTraslate': { 
+            'property': 'checked', 
+            'stateValue': cbTraslate.checked, 
+        },
+        'cbCreate': { 
+            'property': 'checked', 
+            'stateValue': cbCreate.checked, 
+        },
+        'personListEl': { 
+            'property': 'value', 
+            'stateValue': personListEl.value, 
+        },
+        'personListTranslitEl': { 
+            'property': 'value', 
+            'stateValue': personListTranslitEl.value, 
+        },
+    }
+    localStorage.setItem('state', JSON.stringify(state))
+    console.log("🚀 ~ file: script.js:145 ~ saveState ~ state", state)
+}
 
 String.prototype.getPersonList = function() {
     return this
@@ -161,8 +196,10 @@ const createItemsElements = () => {
                 en: enList[i].split(' '),
             }))
             .map(el=>{
-                if (el.ua.length<2)
+                if (el.ua.length<2) {
                     el.ua.push('')
+                    el.ua.push('')
+                }
                 if (el.en.length<2)
                     el.en.push('')
                 return el
@@ -171,30 +208,53 @@ const createItemsElements = () => {
                 ua: {
                     f: n.ua[0],
                     l: n.ua[1],
+                    o: n.ua[2],
                 },
                 en: {
                     f: n.en[0],
                     l: n.en[1],
                 },
             }))
-            .map((n, i) => `
-            ${i%3===0&&i!==0?'<div class="page-break"></div>':''}
-            ${i%3===0?'<div class="line"></div>':''}
-            <div class="table-tiem">
-                <div>
-                    <span>${n.ua.f}</span>
-                    <span>${n.ua.l}</span>
-                </div>    
-                <div>
-                    <span>${n.en.f}</span>
-                    <span>${n.en.l}</span>
-                </div>
-                <img alt="background" src="./from_msword/image.png">
-                <div class="item-background1"></div>
-                <div class="item-background2"></div>
-                <div class="item-background3"></div>
-            </div>
-            `).join('')
+            .map((n, i) => [
+                selTableType.value==='type_en'?`
+                    ${i%3===0&&i!==0?'<div class="page-break"></div>':''}
+                    ${i%3===0?'<div class="line"></div>':''}
+                    <div class="table-tiem">
+                        <div>
+                            <span>${n.ua.f}</span>
+                            <span>${n.ua.l}</span>
+                        </div>    
+                        <div>
+                            <span>${n.en.f}</span>
+                            <span>${n.en.l}</span>
+                        </div>
+                        <img alt="background" src="./from_msword/image.png">
+                        <div class="item-background1"></div>
+                        <div class="item-background2"></div>
+                        <div class="item-background3"></div>
+                    </div>
+                `:'',
+                selTableType.value==='type_ua'?`
+                    ${i%2===0&&i!==0?'<div class="page-break"></div>':''}
+                    ${i%2===0?'<div class="line"></div>':''}
+                    <div class="table-tiem">
+                        <div>
+                            <span>${n.ua.f}</span>
+                        </div>
+                        <div>
+                            <span>${n.ua.l}</span>
+                        </div>
+                        <div>
+                            <span>${n.ua.o}</span>
+                        </div>    
+                        <img alt="background" src="./from_msword/image_type_ua.png">
+                        <div class="item-background1"></div>
+                        <div class="item-background2"></div>
+                        <div class="item-background3"></div>
+                    </div>
+                `:'',
+            ]
+            .join('')).join('')
     resizeSpanFont()
 }
 
@@ -210,6 +270,25 @@ const onEdit = ()=>{
     if(cbCreate.checked)
         createItemsElements()
     onScroll()
+    saveState()
+}
+
+// const onLoad = () => {
+//     const state = JSON.parse(localStorage.getItem('state'))
+//     for (si in state) {
+//         window[si][si.property] = si.value
+//     }
+//     console.log(state)
+// }
+
+const onTableTypeChange = ()=>{
+    Array.from(selTableType.children)
+    .map(option=>option.value)
+    .forEach(cl=>{
+        document.body.classList.remove(cl)
+    })
+    document.body.classList.add(selTableType.value)
+    onEdit()
 }
 
 btnTraslate.addEventListener('click', translitList)
@@ -226,28 +305,33 @@ btnNameReverse.addEventListener('click', ()=>{
     onEdit()
 })
 
+btnToSmallerFont.addEventListener('click', ()=>{
+    const tableItems = document.querySelectorAll('.table-tiem')
+    const minFont = Math.min(...Array.from(tableItems).map(ti=>parseFloat(ti.style.fontSize)))
+    tableItems.forEach(ti=>{ti.style.fontSize=minFont+'px'})
+    
+    console.log(minFont)
+})
+
 personListEl.addEventListener('keyup', onEdit)
 personListTranslitEl.addEventListener('keyup', onEdit)
 
 cbImg.addEventListener('change', ()=>{
-    // document.body.setAttribute('class', cbImg.checked?'img':'')
     if (cbImg.checked) {
         document.body.classList.add('img')
     }
     else {
         document.body.classList.remove('img')
     }
+    saveState()
 })
 
-selTableType.addEventListener('change', ()=>{
-    Array.from(selTableType.children)
-    .map(option=>option.value)
-    .forEach(cl=>{
-        document.body.classList.remove(cl)
-    })
-    document.body.classList.add(selTableType.value)
-})
+cbTraslate.addEventListener('change', saveState)
+cbCreate.addEventListener('change', saveState)
+
+selTableType.addEventListener('change', onTableTypeChange)
 
 document.addEventListener('scroll', onScroll)
-  
-onEdit()
+
+// onLoad()
+onTableTypeChange()

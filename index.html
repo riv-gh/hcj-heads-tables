@@ -13,18 +13,19 @@
     <div class="control">
         <button type="button" id="btn_translate"><input id="cb_translate" type="checkbox" checked="checked"> Перекласти</button>
         <button type="button" id="btn_create"><input id="cb_create" type="checkbox" checked="checked"> Сформувати</button>
+        <button type="button" id="btn_to_smaller_font">Вирівняти</button>
         <button type="button" onclick="window.print()">На друк</button>
-        <select id="sel_table_type" title="Тип табличок">
+        <select style="display: none;" id="sel_table_type" title="Тип табличок">
             <option select="select" value="type_en">з анг.</option>
             <option value="type_ua">укр.</option>
         </select>
         <div>
             <input type="checkbox" id="cb_img"> <label for="cb_img">як було</label>
-            <button type="button" onclick="window.open('https://github.com/riv-gh/hcj-heads-tables/')">GitHub</button>
         </div>
     </div>
     <button type="button" id="btn_name_reverse">Розгорнути</button>
-    <textarea id="person-list" placeholder="Ім'я Прізвище у стовпчик">
+    <button type="button" id="btn_git" onclick="window.open('https://github.com/riv-gh/hcj-heads-tables/')">GitHub</button>
+    <!-- <textarea id="person-list" placeholder="Ім'я Прізвище у стовпчик">
 Григорій Усик
 Інна Плахтій
 Оксана Блажівська
@@ -40,6 +41,11 @@
 Олена Ковбій
 Тетяна Бондаренко
 Всеволод Князєв
+    </textarea> -->
+    <textarea id="person-list" placeholder="Ім'я Прізвище у стовпчик">
+Усик Григорій тест
+Плахтій Інна тест
+
     </textarea>
     <textarea id="person-list-translate" placeholder="Ім'я Прізвище транслітом у стовпчик"></textarea>
 </div>
