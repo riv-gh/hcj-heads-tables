@@ -108,7 +108,9 @@ const cbTraslate = document.getElementById('cb_translate')
 const cbCreate = document.getElementById('cb_create')
 const btnTraslate = document.getElementById('btn_translate')
 const btnCreate = document.getElementById('btn_create')
+const btnNameReverse = document.getElementById('btn_name_reverse')
 const cbImg = document.getElementById('cb_img')
+const selTableType = document.getElementById('sel_table_type')
 const scrollEl = document.getElementById('scroll')
 
 String.prototype.getPersonList = function() {
@@ -213,11 +215,37 @@ const onEdit = ()=>{
 btnTraslate.addEventListener('click', translitList)
 btnCreate.addEventListener('click', createItemsElements)
 
+btnNameReverse.addEventListener('click', ()=>{
+    personListEl.value = 
+    personListEl.value
+    .split('\n')
+    .map(line=>line.trim())
+    .filter(line=>line!='')
+    .map(line=>line.split(' ').filter(word=>word!='').reverse().join(' '))
+    .join('\n')
+    onEdit()
+})
+
 personListEl.addEventListener('keyup', onEdit)
 personListTranslitEl.addEventListener('keyup', onEdit)
 
 cbImg.addEventListener('change', ()=>{
-    document.body.setAttribute('class', cbImg.checked?'img':'')
+    // document.body.setAttribute('class', cbImg.checked?'img':'')
+    if (cbImg.checked) {
+        document.body.classList.add('img')
+    }
+    else {
+        document.body.classList.remove('img')
+    }
+})
+
+selTableType.addEventListener('change', ()=>{
+    Array.from(selTableType.children)
+    .map(option=>option.value)
+    .forEach(cl=>{
+        document.body.classList.remove(cl)
+    })
+    document.body.classList.add(selTableType.value)
 })
 
 document.addEventListener('scroll', onScroll)

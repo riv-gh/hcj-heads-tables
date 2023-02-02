@@ -75,6 +75,14 @@
     font-size: 24px;
 }
 
+#btn_name_reverse {
+    position: fixed;
+    width: 100px;
+    top: 0;
+    left: calc( 700px + (100% - 800px) / 2 );
+    z-index: 9999;
+}
+
 @media screen {
     #person-table-conatiner {
         margin-top: 60px;
