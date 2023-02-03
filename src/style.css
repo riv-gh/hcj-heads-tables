@@ -201,9 +201,13 @@ body.type_en.img .item-background3 {
     background-color: pink;
 }
 
+.type_ua .page-break {
+    width: 745px;
+}
+
 @media print {
     .no-print,
-    .font-buttons {
+    .font-buttons * {
         display: none;
     }
     .page-break {
