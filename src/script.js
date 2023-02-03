@@ -116,11 +116,8 @@ const scrollEl = document.getElementById('scroll')
 
 const setState = () => {
     const state = JSON.parse(localStorage.getItem('state'))
-    console.log("🚀 ~ file: script.js:119 ~ setState ~ state", state)
     for (si in state) {
         window[si][state[si]['property']] = state[si]['stateValue']
-        console.log("🚀 ~ file: script.js:122 ~ setState ~ si", si)
-        
     }
 }
 setState()
@@ -145,7 +142,6 @@ const saveState = () => {
         },
     }
     localStorage.setItem('state', JSON.stringify(state))
-    console.log("🚀 ~ file: script.js:145 ~ saveState ~ state", state)
 }
 
 String.prototype.getPersonList = function() {
@@ -219,6 +215,18 @@ const createItemsElements = () => {
                 selTableType.value==='type_en'?`
                     ${i%3===0&&i!==0?'<div class="page-break"></div>':''}
                     ${i%3===0?'<div class="line"></div>':''}
+                `:'',
+                selTableType.value==='type_ua'?`
+                    ${i%2===0&&i!==0?'<div class="page-break"></div>':''}
+                    ${i%2===0?'<div class="line"></div>':''}
+                `:'',
+                `
+                <div class="font-buttons">
+                    <button type="button">+</button>
+                    <button type="button">-</button>
+                </div>
+                `,
+                selTableType.value==='type_en'?`
                     <div class="table-tiem">
                         <div>
                             <span>${n.ua.f}</span>
@@ -235,8 +243,6 @@ const createItemsElements = () => {
                     </div>
                 `:'',
                 selTableType.value==='type_ua'?`
-                    ${i%2===0&&i!==0?'<div class="page-break"></div>':''}
-                    ${i%2===0?'<div class="line"></div>':''}
                     <div class="table-tiem">
                         <div>
                             <span>${n.ua.f}</span>
@@ -247,12 +253,12 @@ const createItemsElements = () => {
                         <div>
                             <span>${n.ua.o}</span>
                         </div>    
-                        <img alt="background" src="./from_msword/image_type_ua.png">
-                        <div class="item-background1"></div>
-                        <div class="item-background2"></div>
-                        <div class="item-background3"></div>
+                    </div>
+                    <div class="bacground_ua">
+                        <div></div>
                     </div>
                 `:'',
+                
             ]
             .join('')).join('')
     resizeSpanFont()
@@ -273,21 +279,17 @@ const onEdit = ()=>{
     saveState()
 }
 
-// const onLoad = () => {
-//     const state = JSON.parse(localStorage.getItem('state'))
-//     for (si in state) {
-//         window[si][si.property] = si.value
-//     }
-//     console.log(state)
-// }
-
 const onTableTypeChange = ()=>{
     Array.from(selTableType.children)
     .map(option=>option.value)
     .forEach(cl=>{
         document.body.classList.remove(cl)
     })
-    document.body.classList.add(selTableType.value)
+    document.body.classList.add(selTableType.value);
+    [personListEl, personListTranslitEl].forEach(pl=>{
+        if (pl!==undefined)
+            pl.setAttribute('placeholder', pl.dataset[selTableType.value])
+    })
     onEdit()
 }
 
@@ -332,6 +334,20 @@ cbCreate.addEventListener('change', saveState)
 selTableType.addEventListener('change', onTableTypeChange)
 
 document.addEventListener('scroll', onScroll)
+
+document.addEventListener('click', (event)=>{
+    if (
+        event.target.tagName==='BUTTON' &
+        event.target.parentElement.classList.value==='font-buttons'
+    ) {
+        const thisTableItem = event.target.parentElement.nextElementSibling
+        thisTableItem.style.fontSize = 
+            event.target.textContent==='+' ?
+            parseFloat(thisTableItem.style.fontSize)+1+'px' :
+            parseFloat(thisTableItem.style.fontSize)-1+'px'
+    }
+        
+})
 
 // onLoad()
 onTableTypeChange()

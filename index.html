@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Формування табличок ВРП</title>
-    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="./src/style.css?2">
 </head>
 <body>
 <div class="no-print">
@@ -15,7 +15,7 @@
         <button type="button" id="btn_create"><input id="cb_create" type="checkbox" checked="checked"> Сформувати</button>
         <button type="button" id="btn_to_smaller_font">Вирівняти</button>
         <button type="button" onclick="window.print()">На друк</button>
-        <select style="display: none;" id="sel_table_type" title="Тип табличок">
+        <select id="sel_table_type" title="Тип табличок">
             <option select="select" value="type_en">з анг.</option>
             <option value="type_ua">укр.</option>
         </select>
@@ -25,41 +25,22 @@
     </div>
     <button type="button" id="btn_name_reverse">Розгорнути</button>
     <button type="button" id="btn_git" onclick="window.open('https://github.com/riv-gh/hcj-heads-tables/')">GitHub</button>
-    <!-- <textarea id="person-list" placeholder="Ім'я Прізвище у стовпчик">
-Григорій Усик
-Інна Плахтій
-Оксана Блажівська
-Віталій Саліхов
-Роман Маселко
-Микола Мороз
-Дмитро Лук'янов
-Олександр Сасевич
-Алла Котелевець
-Юлія Бокова
-Ольга Попікова
-Сергій Бурлаков
-Олена Ковбій
-Тетяна Бондаренко
-Всеволод Князєв
-    </textarea> -->
-    <textarea id="person-list" placeholder="Ім'я Прізвище у стовпчик">
-Усик Григорій тест
-Плахтій Інна тест
-
-    </textarea>
-    <textarea id="person-list-translate" placeholder="Ім'я Прізвище транслітом у стовпчик"></textarea>
+    <textarea 
+        id="person-list"
+        data-type_en="Ім'я Прізвище у стовпчик"
+        data-type_ua="Прізвище Ім'я Побатькові у стовпчик"
+        placeholder="Ім'я Прізвище у стовпчик"
+    ></textarea>
+    <textarea
+        id="person-list-translate"
+        data-type_en="Ім'я Прізвище транслітом у стовпчик"
+        data-type_ua="Не заповнюється"
+        placeholder="Ім'я Прізвище транслітом у стовпчик"
+    ></textarea>
 </div>
     <div id="person-table-conatiner">
-        <!-- <div class="table-tiem">
-            <div>Григорій УСИКHryhorii USYK</div>
-            <div>Hryhorii USYK</div>
-            <img alt="background" src="./from_msword.files/image.png">
-            <div class="item-background1"></div>
-            <div class="item-background2"></div>
-            <div class="item-background3"></div>
-        </div> -->
-        <h1>З'явиться при заповненні</h1>
+        <h1>З'явиться при заповненні/створенні</h1>
     </div>
-<script src="./src/script.js"></script>
+<script src="./src/script.js?2"></script>
 </body>
 </html>
