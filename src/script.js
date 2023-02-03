@@ -255,7 +255,7 @@ const createItemsElements = () => {
                         </div>    
                     </div>
                     <div class="bacground_ua">
-                        <div></div>
+                        <div>
                     </div>
                 `:'',
                 
@@ -290,7 +290,9 @@ const onTableTypeChange = ()=>{
         if (pl!==undefined)
             pl.setAttribute('placeholder', pl.dataset[selTableType.value])
     })
-    onEdit()
+    //onEdit()
+    translitList()
+    createItemsElements()
 }
 
 btnTraslate.addEventListener('click', translitList)
