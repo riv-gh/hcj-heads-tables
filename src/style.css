@@ -214,7 +214,9 @@ body.type_en.img .item-background3 {
     flex-direction: column;
     justify-content: center;
     z-index: 3;
-    /* outline: 1px solid red; */
+}
+.line+.font-buttons {
+    margin-top: 30px;
 }
 .font-buttons>button {
     width: 100px;
