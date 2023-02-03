@@ -290,7 +290,8 @@ const onTableTypeChange = ()=>{
         if (pl!==undefined)
             pl.setAttribute('placeholder', pl.dataset[selTableType.value])
     })
-    onEdit()
+    translitList()
+    createItemsElements()
 }
 
 btnTraslate.addEventListener('click', translitList)
