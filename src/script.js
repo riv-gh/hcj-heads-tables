@@ -224,6 +224,7 @@ const createItemsElements = () => {
                 <div class="font-buttons">
                     <button type="button">+</button>
                     <button type="button">-</button>
+                    <div class="font-label"></div>
                 </div>
                 `,
                 selTableType.value==='type_en'?`
@@ -310,7 +311,7 @@ btnNameReverse.addEventListener('click', ()=>{
 
 btnToSmallerFont.addEventListener('click', ()=>{
     const tableItems = document.querySelectorAll('.table-tiem')
-    const minFont = Math.min(...Array.from(tableItems).map(ti=>parseFloat(ti.style.fontSize)))
+    const minFont = Math.floor(Math.min(...Array.from(tableItems).map(ti=>parseFloat(ti.style.fontSize))))
     tableItems.forEach(ti=>{ti.style.fontSize=minFont+'px'})
     
     console.log(minFont)
@@ -336,6 +337,14 @@ selTableType.addEventListener('change', onTableTypeChange)
 
 document.addEventListener('scroll', onScroll)
 
+let global_timeout
+const clearElement = (el) => { el.textContent = '' }
+const textTimeout = (element, text, timeout=1500) => {
+    clearTimeout(global_timeout)
+    element.textContent = text
+    global_timeout = setTimeout(clearElement, timeout, element)
+}
+
 document.addEventListener('click', (event)=>{
     if (
         event.target.tagName==='BUTTON' &
@@ -346,6 +355,8 @@ document.addEventListener('click', (event)=>{
             event.target.textContent==='+' ?
             parseFloat(thisTableItem.style.fontSize)+1+'px' :
             parseFloat(thisTableItem.style.fontSize)-1+'px'
+        // thisTableItem.previousElementSibling.querySelector('.font-label').textContent = thisTableItem.style.fontSize
+        textTimeout(thisTableItem.previousElementSibling.querySelector('.font-label'), thisTableItem.style.fontSize)
     }
         
 })
